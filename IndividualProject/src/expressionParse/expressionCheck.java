@@ -159,7 +159,7 @@ public class expressionCheck {
 					return false;
 				}
 				//if operator comes after left bracket expression is false
-				if (currentChar != '-') {
+				if (nextChar != '-') {
 					if (operators.contains(nextChar)) {
 						printError(i+1, 9);
 						return false;
