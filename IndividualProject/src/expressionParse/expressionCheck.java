@@ -105,8 +105,10 @@ public class expressionCheck {
 		
 		//if first character is operator, expression is false
 		if (operators.contains(currentChar)) {
-			printError(0, 9);
-			return false;
+			if (currentChar != '-') {
+				printError(0, 9);
+				return false;
+			}
 		}
 
 		//if first character is a letter then expression is false
@@ -157,9 +159,11 @@ public class expressionCheck {
 					return false;
 				}
 				//if operator comes after left bracket expression is false
-				if (operators.contains(nextChar)) {
-					printError(i+1, 9);
-					return false;
+				if (nextChar != '-') {
+					if (operators.contains(nextChar)) {
+						printError(i+1, 9);
+						return false;
+					}
 				}
 			}
 			//if we find a right bracket
