@@ -50,6 +50,10 @@ public class preFix {
 		boolean prevNum = true;
 		//create the return string
 		String returnString = new String();
+		//unary minus at beginning
+		if (parsed.charAt(0) == '-') {
+			returnString += "0";
+		}
 		//go through string one character at a time
 		for (int i = 0; i < parsed.length(); i++) {
 			//current character
@@ -71,6 +75,9 @@ public class preFix {
 			}
 			//if currant character is an operator
 			else if (operatorMap.containsKey(myChar)) {
+				if (prevNum == false) {
+					returnString += " 0";
+				}
 				//while the stack has data and the top of the stack has higher precedence then pop values into string
 				while (!myStack.empty() && operatorMap.get(myStack.peek()) >= operatorMap.get(myChar)) {
 					//add spaces between operators to make double digits easier
