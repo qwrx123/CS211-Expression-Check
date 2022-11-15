@@ -38,7 +38,7 @@ public class postFix {
 			//get current char
 			char currentChar = parsed[i].charAt(0);
 			//if the current char is an operand
-			if (mySet.contains(currentChar)) {
+			if (mySet.contains(currentChar) && parsed[i].length() == 1) {
 				//accumulator will be changed by change amount
 				if (currentChar != '!') {
 					change = myStack.pop();
@@ -212,18 +212,32 @@ public class postFix {
 	private int makeNumber(String numString) throws ArithmeticException {
 		//start at 0
 		int accumulate = 0;
-		
-		//for loop every character in string
-        for (int i = 0; i < numString.length(); i++) {
-        	//if shift is an overflow throw error
-        	if (accumulate > Integer.MAX_VALUE/10) {
-        		throw new ArithmeticException("Integer Overflow Error");
-        	}
-        	//shift numbers 1 to the left in base 10
-            accumulate *= 10;
-            //accumulate the current char
-            accumulate += numString.charAt(i)-'0';
-        }
+		if (numString.charAt(0) == '-') {
+	        for (int i = 1; i < numString.length(); i++) {
+	        	//if shift is an overflow throw error
+	        	if (accumulate > Integer.MAX_VALUE/10) {
+	        		throw new ArithmeticException("Integer Overflow Error");
+	        	}
+	        	//shift numbers 1 to the left in base 10
+	            accumulate *= 10;
+	            //accumulate the current char
+	            accumulate += numString.charAt(i)-'0';
+	        }
+	        accumulate *= -1;
+		}
+		else {
+			//for loop every character in string
+	        for (int i = 0; i < numString.length(); i++) {
+	        	//if shift is an overflow throw error
+	        	if (accumulate > Integer.MAX_VALUE/10) {
+	        		throw new ArithmeticException("Integer Overflow Error");
+	        	}
+	        	//shift numbers 1 to the left in base 10
+	            accumulate *= 10;
+	            //accumulate the current char
+	            accumulate += numString.charAt(i)-'0';
+	        }
+		}
         //return the correct value
 		return accumulate;
 	}

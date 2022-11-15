@@ -48,11 +48,21 @@ public class preFix {
 	public String postFix(String parsed) {
 		//make multiple digit numbers work
 		boolean prevNum = true;
+		//
+		boolean unary = false;
 		//create the return string
 		String returnString = new String();
 		//unary minus at beginning
 		if (parsed.charAt(0) == '-') {
-			returnString += "0";
+			//if after a unary negative is a left bracket then use non sticky minus
+			if (valueSet.contains(parsed.charAt(1))) {
+				returnString += "0";
+			}
+			//Negative is a sticky negative
+			else {
+				prevNum = true;
+				unary = true;
+			}
 		}
 		//go through string one character at a time
 		for (int i = 0; i < parsed.length(); i++) {
@@ -61,6 +71,8 @@ public class preFix {
 			//if currant character is left parentheses or like characters
 			if (valueSet.contains(myChar)) {
 				myStack.push(myChar);
+				//when operator next to left bracket, adds 0 so not unary
+				unary = false;
 			}
 			//if currant character is right parentheses or like characters
 			else if (pareMap.containsKey(myChar)) {
@@ -71,13 +83,25 @@ public class preFix {
 				//remove matching bracket
 				myStack.pop();
 				//bracket isn't a number
+				unary = false;
+				//bracket isn't a number
 				prevNum = false;
 			}
-			//if currant character is an operator
-			else if (operatorMap.containsKey(myChar)) {
-				if (prevNum == false) {
-					returnString += " 0";
-				}
+			//if currant character is an operator, unary negatives act like numbers
+			else if (operatorMap.containsKey(myChar) && unary != true) {
+				//if the previous number was some sort of operator
+				if (prevNum == false && myChar == '-') {
+					
+					if (valueSet.contains(parsed.charAt(i+1))) {
+						returnString += " 0";
+					}
+					else {
+						returnString += " -";
+						prevNum = true;
+						unary = true;
+						continue;
+					}
+ 				}
 				//while the stack has data and the top of the stack has higher precedence then pop values into string
 				while (!myStack.empty() && operatorMap.get(myStack.peek()) >= operatorMap.get(myChar)) {
 					//add spaces between operators to make double digits easier
@@ -87,8 +111,12 @@ public class preFix {
 				myStack.push(myChar);
 				//operator isn't a number
 				prevNum = false;
+				//if another operator, unary is true
+				if (myChar != '!') {
+					unary = true;
+				}
 			}
-			//current character is a number
+			//current character is a number or a unary -
 			else {
 				//if the previous character wasn't a number then add space to separate values
 				if (prevNum == false) {
@@ -98,6 +126,8 @@ public class preFix {
 				returnString += myChar;
 				//this is a number
 				prevNum = true;
+				//character doesn't make unary operator
+				unary = false;
 			}
 		}
 		//pop all remaining values of the stack to return string
