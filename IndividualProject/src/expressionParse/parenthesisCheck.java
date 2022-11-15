@@ -108,7 +108,7 @@ public class parenthesisCheck{
 		//if stack is not empty then return false, too many left brackets
 		if (!myStack.empty()) {
 			//add number of spaces as characters in string
-        	for (int i = 0; i < myExpression.length(); i++) {
+        	for (int i = 0; i < myExpression.length() + 9; i++) {
         		System.out.print(" ");
         	}
         	//add incomplete error then add matching parenthesis
