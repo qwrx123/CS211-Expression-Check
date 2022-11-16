@@ -215,15 +215,18 @@ public class postFix {
 		if (numString.charAt(0) == '-') {
 	        for (int i = 1; i < numString.length(); i++) {
 	        	//if shift is an overflow throw error
-	        	if (accumulate > Integer.MAX_VALUE/10) {
-	        		throw new ArithmeticException("Integer Overflow Error");
+	        	if (accumulate < Integer.MIN_VALUE/10) {
+	        		throw new ArithmeticException("Integer Underflow Error");
 	        	}
 	        	//shift numbers 1 to the left in base 10
 	            accumulate *= 10;
+	            //if adding would overflow then throw error
+	        	if (accumulate < Integer.MIN_VALUE+(numString.charAt(i)-'0')) {
+	        		throw new ArithmeticException("Integer Underflow Error");
+	        	}
 	            //accumulate the current char
-	            accumulate += numString.charAt(i)-'0';
+	            accumulate -= numString.charAt(i)-'0';
 	        }
-	        accumulate *= -1;
 		}
 		else {
 			//for loop every character in string
@@ -234,6 +237,10 @@ public class postFix {
 	        	}
 	        	//shift numbers 1 to the left in base 10
 	            accumulate *= 10;
+	            //if adding would overflow then throw error
+	        	if (accumulate > Integer.MAX_VALUE-(numString.charAt(i)-'0')) {
+	        		throw new ArithmeticException("Integer Overflow Error");
+	        	}
 	            //accumulate the current char
 	            accumulate += numString.charAt(i)-'0';
 	        }
