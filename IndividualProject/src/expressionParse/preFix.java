@@ -84,8 +84,7 @@ public class preFix {
 				myStack.pop();
 				//bracket isn't a number
 				unary = false;
-				//bracket isn't a number
-				prevNum = false;
+
 			}
 			//if currant character is an operator, unary negatives act like numbers
 			else if (operatorMap.containsKey(myChar) && unary != true) {
@@ -114,6 +113,10 @@ public class preFix {
 				//if another operator, unary is true
 				if (myChar != '!') {
 					unary = true;
+				}
+				//Factorial should act like numbers to operators
+				else {
+					prevNum = true;
 				}
 			}
 			//current character is a number or a unary -

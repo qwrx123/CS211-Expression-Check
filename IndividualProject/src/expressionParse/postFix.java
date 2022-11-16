@@ -212,6 +212,7 @@ public class postFix {
 	private int makeNumber(String numString) throws ArithmeticException {
 		//start at 0
 		int accumulate = 0;
+		//if the string thats being converted is negative
 		if (numString.charAt(0) == '-') {
 	        for (int i = 1; i < numString.length(); i++) {
 	        	//if shift is an overflow throw error
@@ -228,6 +229,7 @@ public class postFix {
 	            accumulate -= numString.charAt(i)-'0';
 	        }
 		}
+		//the string is positive
 		else {
 			//for loop every character in string
 	        for (int i = 0; i < numString.length(); i++) {
