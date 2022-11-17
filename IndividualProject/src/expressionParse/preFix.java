@@ -59,7 +59,7 @@ public class preFix {
 			}
 			//Negative is a sticky negative
 			else {
-				prevNum = true;
+				prevNum = false;
 			}
 		}
 		//go through string one character at a time
