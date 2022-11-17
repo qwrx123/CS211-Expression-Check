@@ -56,7 +56,8 @@ public class preFix {
 		if (parsed.charAt(0) == '-') {
 			//if after a unary negative is a left bracket then use non sticky minus
 			if (valueSet.contains(parsed.charAt(1))) {
-				returnString += "0";
+				returnString += "-1";
+				parsed = "*" + parsed.substring(1);
 			}
 			//Negative is a sticky negative
 			else {
@@ -71,6 +72,8 @@ public class preFix {
 			//if currant character is left parentheses or like characters
 			if (valueSet.contains(myChar)) {
 				myStack.push(myChar);
+				//left bracket isn't a number
+				prevNum = false;
 				//when operator next to left bracket, adds 0 so not unary
 				unary = false;
 			}
@@ -92,7 +95,8 @@ public class preFix {
 				if (prevNum == false && myChar == '-') {
 					
 					if (valueSet.contains(parsed.charAt(i+1))) {
-						returnString += " 0";
+						returnString += " -1";
+						myChar = '*';
 					}
 					else {
 						returnString += " -";

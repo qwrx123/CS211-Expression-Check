@@ -35,6 +35,9 @@ public class postFix {
 	
 	public int evaluate(String[] parsed) throws ArithmeticException {
 		for (int i = 0; i < parsed.length; i++) {
+			if (parsed[i].length() <= 0) {
+				continue;
+			}
 			//get current char
 			char currentChar = parsed[i].charAt(0);
 			//if the current char is an operand
