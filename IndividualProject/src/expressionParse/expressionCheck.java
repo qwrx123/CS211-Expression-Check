@@ -126,8 +126,8 @@ public class expressionCheck {
 			if (operators.contains(currentChar)) {
 				//if current char is not the factorial operator
 				if (currentChar != '!') {
-					//operator next to an operator is false
-					if (operators.contains(nextChar)) {
+					//if the next char is an operator that is not minus
+					if (operators.contains(nextChar) && nextChar != '-') {
 						printError(i+1, 9);
 						return false;
 					}

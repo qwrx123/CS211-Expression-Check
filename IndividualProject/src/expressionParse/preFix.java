@@ -48,8 +48,6 @@ public class preFix {
 	public String postFix(String parsed) {
 		//make multiple digit numbers work
 		boolean prevNum = true;
-		//
-		boolean unary = false;
 		//create the return string
 		String returnString = new String();
 		//unary minus at beginning
@@ -62,7 +60,6 @@ public class preFix {
 			//Negative is a sticky negative
 			else {
 				prevNum = true;
-				unary = true;
 			}
 		}
 		//go through string one character at a time
@@ -74,8 +71,6 @@ public class preFix {
 				myStack.push(myChar);
 				//left bracket isn't a number
 				prevNum = false;
-				//when operator next to left bracket, adds 0 so not unary
-				unary = false;
 			}
 			//if currant character is right parentheses or like characters
 			else if (pareMap.containsKey(myChar)) {
@@ -85,23 +80,20 @@ public class preFix {
 				}
 				//remove matching bracket
 				myStack.pop();
-				//bracket isn't a number
-				unary = false;
 
 			}
 			//if currant character is an operator, unary negatives act like numbers
-			else if (operatorMap.containsKey(myChar) && unary != true) {
+			else if (operatorMap.containsKey(myChar)) {
 				//if the previous number was some sort of operator
 				if (prevNum == false && myChar == '-') {
 					
-					if (valueSet.contains(parsed.charAt(i+1))) {
+					if (valueSet.contains(parsed.charAt(i+1)) || parsed.charAt(i+1) == '-') {
 						returnString += " -1";
 						myChar = '*';
 					}
 					else {
 						returnString += " -";
 						prevNum = true;
-						unary = true;
 						continue;
 					}
  				}
@@ -114,12 +106,8 @@ public class preFix {
 				myStack.push(myChar);
 				//operator isn't a number
 				prevNum = false;
-				//if another operator, unary is true
-				if (myChar != '!') {
-					unary = true;
-				}
 				//Factorial should act like numbers to operators
-				else {
+				if (myChar == '!') {
 					prevNum = true;
 				}
 			}
@@ -133,8 +121,6 @@ public class preFix {
 				returnString += myChar;
 				//this is a number
 				prevNum = true;
-				//character doesn't make unary operator
-				unary = false;
 			}
 		}
 		//pop all remaining values of the stack to return string
