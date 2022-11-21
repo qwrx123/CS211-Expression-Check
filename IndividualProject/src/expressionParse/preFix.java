@@ -86,11 +86,13 @@ public class preFix {
 			else if (operatorMap.containsKey(myChar)) {
 				//if the previous number was some sort of operator
 				if (prevNum == false && myChar == '-') {
-					
+					//determine whether unary minus is sticky or not
+					//unary minus is not sticky
 					if (valueSet.contains(parsed.charAt(i+1)) || parsed.charAt(i+1) == '-') {
 						returnString += " -1";
 						myChar = '*';
 					}
+					//unary minus is sticky
 					else {
 						returnString += " -";
 						prevNum = true;
