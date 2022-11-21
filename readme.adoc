@@ -1,1 +1,6 @@
-This is my CS211 bonus project. The program takes an expression, and if the expression is incorrect, will tell you what's wrong. If the expression is correct the program will give the answer to the expression
+This program takes in any expression with numbers of any integer and returns the result
+results only work if the end result and the running total are within an integer
+if not you will get an overflow error, but it wont crash
+unary negatives work (5*-3 is valid) and unary negatives stick to the number (-5^2 = 25)
+unary negatives dont stick to parenthesis so -(5+3) is -1 * (5+3)
+Program will repeat when given an invalid expression as well as when an answer has been found
