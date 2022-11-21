@@ -35,6 +35,7 @@ public class postFix {
 	
 	public int evaluate(String[] parsed) throws ArithmeticException {
 		for (int i = 0; i < parsed.length; i++) {
+			//if empty array, continue
 			if (parsed[i].length() <= 0) {
 				continue;
 			}
@@ -208,6 +209,8 @@ public class postFix {
 		}
 		//accumulator is the final result
 		accumulator = myStack.pop();
+		//in case something bad happens
+		myStack.clear();
 		return accumulator;
 	}
 	
