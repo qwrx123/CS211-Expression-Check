@@ -63,7 +63,7 @@ public class expressionParse {
 			System.out.println("Would you like to calculate another expression");
 			System.out.println("\"Yes\" and \"Y\" for yes and \"No\" and \"N\" for No");
 			while (!validMessage) {
-				String userInput = input.next();
+				String userInput = input.nextLine();
 				if (userInput.toLowerCase().equals("yes") || userInput.toLowerCase().equals("y")) {
 					System.out.println("Lets continue");
 					validMessage = true;
