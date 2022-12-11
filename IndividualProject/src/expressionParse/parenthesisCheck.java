@@ -15,7 +15,8 @@ public class parenthesisCheck{
 	private HashSet<Character> valueSet;
 	//error codes for when something goes wrong
 	private HashMap<Integer, String> errorCodes;
-	
+	//how much to shift string when error happens
+	private static final int shiftNum = 9;
 	public parenthesisCheck() {
 		//if no errors given, use default errors
 		this(createDefaultError());
@@ -68,7 +69,7 @@ public class parenthesisCheck{
 					//if stack is empty there are too many right parenthesis
 	                if (myStack.empty()) {
 	                	//add number of spaces to reach where we are in the string - 1
-	                	for (int j = 0; j < i + 9; j++) {
+	                	for (int j = 0; j < i + shiftNum; j++) {
 	                		System.out.print(" ");
 	                	}
 	                	//if right parenthesis then expect left parenthesis
@@ -92,7 +93,7 @@ public class parenthesisCheck{
 	                //if brackets are mismatched then expression is false
 	                if (myChar != myMap.get(myStack.peek())) {
 	                	//add number of spaces to reach where we are -1
-	                	for (int j = 0; j < i + 9; j++) {
+	                	for (int j = 0; j < i + shiftNum; j++) {
 	                		System.out.print(" ");
 	                	}
 	                	//get incomplete error then add the matching parenthesis to the end
@@ -108,7 +109,7 @@ public class parenthesisCheck{
 		//if stack is not empty then return false, too many left brackets
 		if (!myStack.empty()) {
 			//add number of spaces as characters in string
-        	for (int i = 0; i < myExpression.length() + 9; i++) {
+        	for (int i = 0; i < myExpression.length() + shiftNum; i++) {
         		System.out.print(" ");
         	}
         	//add incomplete error then add matching parenthesis

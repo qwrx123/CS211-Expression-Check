@@ -1,6 +1,10 @@
-This program takes in any expression with numbers of any integer and returns the result
-results only work if the end result and the running total are within an integer
-if not you will get an overflow error, but it wont crash
-unary negatives work (5*-3 is valid) and unary negatives stick to the number (-5^2 = 25)
-unary negatives dont stick to parenthesis so -(5+3) is -1 * (5+3)
-Program will repeat when given an invalid expression as well as when an answer has been found
+ This program takes in any expression with numbers of any integer and returns the result
+ results only work if the end result and the running total are within an integer
+ if not you will get an overflow error, but it wont crash
+ unary negatives work (5*-3 is valid) and unary negatives stick to the number (-5^2 = 25)
+ unary negatives don't stick to parenthesis so -(5+3) is -1 * (5+3)
+ Program will repeat when given an invalid expression as well as when an answer has been found
+ I believe i found every edge case including overflowing integer limits
+ as well as negative factorial
+ Mod 0 is valid just like in windows calculator
+ The running total must be within an int for a answer to be given 2147483648-1 gives overflow

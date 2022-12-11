@@ -14,6 +14,9 @@ public class expressionCheck {
 	private HashSet<Character> operators;
 	private HashSet<Character> numbers;
 	
+	//how much to shift when error happens
+	private static final int shiftError = 9;
+	
 	public expressionCheck() {
 		//if no error codes specified, create defaults
 		this(createDefaultError());
@@ -74,7 +77,7 @@ public class expressionCheck {
 	
 	//print error function for reducing lines of code
 	private void printError(int location, int error) {
-		for (int i = 0; i < location + 9; i++) {
+		for (int i = 0; i < location + shiftError; i++) {
 			System.out.print(" ");
 		}
 		System.out.println(errorCodes.get(error));
